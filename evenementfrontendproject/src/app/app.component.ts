@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthService } from './services/auth.service';
 import { Router } from '@angular/router';
+import { KeycloakService } from 'keycloak-angular';
+import { KeycloakProfile } from 'keycloak-js';
 
 @Component({
   selector: 'app-root',
@@ -10,15 +11,26 @@ import { Router } from '@angular/router';
 export class AppComponent implements OnInit {
   title = 'evenementfrontendproject';
 
-  constructor(public authService: AuthService, private router: Router) { }
+  public profile? : KeycloakProfile;
+
+  constructor(public keycloakService : KeycloakService) {}
 
   ngOnInit() {
-    this.authService.loadToken();
-    if (this.authService.getToken() == null || this.authService.isTokenExpired())
-      this.router.navigate(['/login']);
+    let res = this.keycloakService.isLoggedIn();
+    if (res)
+      this.keycloakService.loadUserProfile().then(profile => {
+        this.profile = profile;
+      });
   }
 
   onLogout() {
-    this.authService.logout();
-  }
+    this.keycloakService.logout(window.location.origin);
+    }
+    async onLogin() {
+    await this.keycloakService.login({
+    redirectUri: window.location.origin
+    });
+    }
+    
+  
 }

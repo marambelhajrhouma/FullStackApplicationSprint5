@@ -9,7 +9,7 @@
 <body>
     <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
         <!-- Brand -->
-        <a class="navbar-brand" href="#">Gestion Evenements</a>
+        <a class="navbar-brand" href="#">Gestion Produits</a>
         
         <!-- Links -->
         <ul class="navbar-nav">
@@ -18,10 +18,10 @@
             </li>
             <!-- Dropdown -->
             <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">Evenement</a>
+                <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">Produits</a>
                 <div class="dropdown-menu">
-                    <a class="dropdown-item" href="/addEvenement" *ngIf="authService.isAdmin()">Ajouter</a>
-                    <a class="dropdown-item" href="#">Lister</a>
+                    <a class="dropdown-item" href="/addEvenement">Ajouter</a>
+                    <a class="dropdown-item" href="/evenements">Lister</a>
                     <a class="dropdown-item" routerLink="RechercheParTheme">Recherche Par Theme</a>
                     <a class="dropdown-item" routerLink="/rechercheParNom" >Recherche Par Nom</a>
                     <a class="dropdown-item" routerLink="/listeThemes" >Gestion des themes</a>
@@ -32,10 +32,10 @@
         <ul class="navbar-nav ml-auto">
             <li> <a class="nav-link"></a></li>
             <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="userDropdown" data-toggle="dropdown">[{{authService.loggedUser}}]</a>
+                <a class="nav-link dropdown-toggle" href="#" id="userDropdown" data-toggle="dropdown">[username]</a>
                 <div class="dropdown-menu">
-                    <a class="dropdown-item" router-Link="/login" *ngIf="!authService.isloggedIn" >Login</a>
-                    <a class="dropdown-item" *ngIf="authService.isloggedIn"  (click)="onLogout()">Logout</a>
+                    <a class="dropdown-item" >Login</a>
+                    <a class="dropdown-item" >Logout</a>
                     <a class="dropdown-item" href="#">Profile</a>
                 </div>
             </li>
